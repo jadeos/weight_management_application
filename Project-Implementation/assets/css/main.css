@@ -1,0 +1,93 @@
+#pag_style{
+    margin-left: 60&;
+}
+
+#right-side{
+    float:right;
+}
+
+.container{
+	margin-left:250px;
+	text-align:center;
+
+
+
+}
+/* Footer */
+#footer{
+  position: fixed;
+  Width: 100%;
+  bottom: 0%;
+
+}
+
+/*profile page-user information*/
+#content{
+  position:relative;
+  margin-left:25%;
+  text-align:left;
+
+  border:2px solid black;
+  margin-top:0%;
+
+
+
+}
+#content h3{
+  text-align:left;
+}
+
+#user_img{
+  width:20%;
+  height:250px;
+  margin-left:5%;
+  margin-top:2%;
+  margin-right:2%;
+  float:left;
+}
+#links{
+    margin-left:40%;
+}
+ #weight{
+
+}
+
+ #aboutu{
+
+
+}
+#weightlog{
+
+}
+#about_user{
+
+
+}
+
+#user_progress{
+    margin-left:-14.5%;
+
+}
+
+
+#photo{
+  margin-left: 30%;
+}
+table{
+  border:2px solid black;
+}
+/*Contact Form*/
+#contactForm{
+  background-color:#808080;
+  border:2px solid black;
+  margin-top: 80px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-right:10%;
+    padding-left:10%;
+}
+#contactForm h2{
+  text-align: center;
+
+}
+/*Login page*/

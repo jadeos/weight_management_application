@@ -1,0 +1,16 @@
+Android wear:
+	 cant seem to work with php. will need to create a andoid package using android studio within project file.  Will also need to find a way to connect to php and mysql. 
+	 Will also need an android manifest xml file 
+	 Connect java to mySQL, retrieve data with php 
+
+
+	 If android studio is needed, need to find a way to work it with php. 
+	 http://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/ gives an example. Test it out? 
+
+	 In this instance, linking it.
+	 Write a script to detect what device is used. 
+	 Once the device is detected,  ask for the necessary files to be used? 
+	 if mobile 
+	 	device should be installed by being uploaded to play store. 
+	 if not mobile
+	 	works on desktop
