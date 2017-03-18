@@ -35,12 +35,12 @@ $helper = new functions();
 	 echo $helper->loadjs("assets/js/bootstrap.js");
 
    //custom js
-   echo $helper->loadjs('assets/js/index.js');echo $helper->loadjs('assets/js/functions.js');
+   echo $helper->loadjs('assets/js/index.js');
+
  
- //if(isset($_POST['login_with_fitbit'])){
+   echo $helper->loadjs('assets/js/functions.js');
+  
 
-
-  //}
 
 
 

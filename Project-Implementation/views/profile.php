@@ -11,6 +11,8 @@ Date Created :21/1/17
 ?>
 
 <?php
+ 
+
 
   include_once '../index.php';
   //include_once '../classes/log_classes.php';
@@ -22,6 +24,7 @@ Date Created :21/1/17
   include_once'../assets/helpers/charts.php';
   //  include_once '../helpers/pagnation.php';
   include_once '../classes/logs.php';
+  include_once '../assets/js/fitbit.php';
 
   //database functions classes 
   $con = new users();
@@ -39,6 +42,7 @@ Date Created :21/1/17
        echo $helper -> redirect("views/updateAccount.php");
     //  header("Location:  updateAccount.php");
     }
+
   
     //Find the user profile and log information.
     $res =$con->searchUser($_SESSION['user_id']);

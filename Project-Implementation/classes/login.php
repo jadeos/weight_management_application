@@ -91,7 +91,7 @@ echo $helper->redirect("passwordReset.php");
 
 //login with fitbit option 
 if(isset($_POST['login_with_fitbit'])){
-      echo $helper->loadjs('assets/js/fitbit.js');
+ 
    if(!isset($_SESSION)){
           session_start();
      }
@@ -100,6 +100,7 @@ if(isset($_POST['login_with_fitbit'])){
    $_SESSION['user_id']=rand(345,789234567);
    $_SESSION['loggedin']=true;
    $_SESSION['fitbit']=true;
+   require_once '../assets/js/fitbit.php';
 
    
 
