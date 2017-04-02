@@ -5,6 +5,45 @@ function getId(obj){
   return document.getElementById(obj);
 }
 
+
+function changeToSettings(){
+    getId('about_user').style.visibility="hidden";
+    getId('weightlog').style.visibility="hidden";
+    getId('weightlog').style.display="none";
+    getId('about_user').style.display="none";
+    getId('foodlog').style.visibility="hidden";
+    getId('foodlog').style.display="none";
+     getId('exerciselog').style.visibility="hidden";
+    getId('exerciselog').style.display="none";
+    getId('waterlog').style.visibility="hidden";
+      getId('waterlog').style.display="none";
+     getId('dashboard').style.visibility="hidden";
+    getId('dashboard').style.display="none";
+     getId('settings').style.visibility="visible";
+    getId('settings').style.display="inline";
+
+
+}
+
+function changeToDashboard(){
+    getId('about_user').style.visibility="hidden";
+    getId('weightlog').style.visibility="hidden";
+    getId('weightlog').style.display="none";
+    getId('about_user').style.display="none";
+    getId('foodlog').style.visibility="hidden";
+    getId('foodlog').style.display="none";
+    getId('exerciselog').style.visibility="hidden";
+    getId('exerciselog').style.display="none";
+    getId('waterlog').style.visibility="hidden";
+     getId('waterlog').style.display="none";
+     getId('dashboard').style.visibility="visible";
+    getId('dashboard').style.display="inline";
+        getId('settings').style.visibility="hidden";
+    getId('settings').style.display="none";
+
+
+}
+
 function changeToWeightLog(){
 
     getId('about_user').style.visibility="hidden";
@@ -17,6 +56,10 @@ function changeToWeightLog(){
     getId('exerciselog').style.display="none";
     getId('waterlog').style.visibility="hidden";
    getId('waterlog').style.display="none";
+    getId('dashboard').style.visibility="hidden";
+   getId('dashboard').style.display="none";
+    getId('settings').style.visibility="hidden";
+    getId('settings').style.display="none";
 
   }
 /*Function changeMenuOptions changes the tabbed menu in the user profile page*/
@@ -32,6 +75,10 @@ function changeToProfile(){
   getId('exerciselog').style.display="none";
      getId('waterlog').style.visibility="hidden";
    getId('waterlog').style.display="none";
+    getId('dashboard').style.visibility="hidden";
+   getId('dashboard').style.display="none";
+    getId('settings').style.visibility="hidden";
+    getId('settings').style.display="none";
 
 
 }
@@ -46,6 +93,10 @@ function changeToFoodLog(){
    getId('exerciselog').style.display="none";
       getId('waterlog').style.visibility="hidden";
    getId('waterlog').style.display="none";
+    getId('dashboard').style.visibility="hidden";
+   getId('dashboard').style.display="none";
+    getId('settings').style.visibility="hidden";
+    getId('settings').style.display="none";
 
 }
 function changeToExLog(){
@@ -59,6 +110,10 @@ function changeToExLog(){
    getId('foodlog').style.display="none";
     getId('waterlog').style.visibility="hidden";
    getId('waterlog').style.display="none";
+    getId('dashboard').style.visibility="hidden";
+   getId('dashboard').style.display="none";
+    getId('settings').style.visibility="hidden";
+    getId('settings').style.display="none";
 
 }
 function changeToWaterLog(){
@@ -72,8 +127,13 @@ function changeToWaterLog(){
    getId('foodlog').style.display="none";
     getId('exerciselog').style.visibility="hidden";
    getId('exerciselog').style.display="none";
+    getId('dashboard').style.visibility="hidden";
+   getId('dashboard').style.display="none";
+   getId('settings').style.visibility="hidden";
+    getId('settings').style.display="none";
 
 }
+
 function showSearchResults(){
     getId('food_search_results').style.display="inline";
 

@@ -8,8 +8,7 @@ define('DB_SERVER','localhost');
 define('DB_USER','root');
 define('DB_PASS' ,'');
 define('DB_NAME', 'weight_mentor');
-
-// define('DB_SERVER','localhost');
+//define('DB_SERVER','localhost');
 // define('DB_USER','admin_jade');
 // define('DB_USER','admin_admin');
  //define('DB_PASS' ,'baw1UTmZKr');
@@ -49,7 +48,8 @@ define('DB_NAME', 'weight_mentor');
 
    //fetch the result. 
    function fetch_row($result){
-   	return mysqli_fetch_row($result);
+      global $connection;
+   	return mysqli_fetch_row($result) or die(mysqli_error($connection));
 
    }
     

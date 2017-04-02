@@ -14,7 +14,7 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="../img/starrs.jpg" alt="logo">
+      <img src="../img/logo.png" alt="logo">
       <div class="carousel-caption">
       	<h3>Caption Text</h3>
       </div>

@@ -1,7 +1,8 @@
 <?php
 //require_once ' ';
 //base url: weightmentor.jadeosullivan.com/
-include_once '../config/db.php';
+//include_once '../config/db.php';
+include_once '../database/database.php';
 global $connection;
 class users{
 
@@ -130,7 +131,7 @@ function update_startWeight($startw,$id){
   return $res;
 }
 function get_BMI_info($id){
-  $res =  sqlQuery( "SELECT current_weight, current_weight_unit, height FROM users WHERE user_id = '$id'");
+  $res =  sqlQuery( "SELECT current_weight, goal_weight, current_weight_unit, height, height_unit FROM users WHERE user_id = '$id'");
   return $res;
 
 }

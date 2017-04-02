@@ -1,7 +1,5 @@
 <?php
-require_once '../db_models/users.php';
-
-//require_once '../database_functions/weight_log.php';
+require_once '../database_functions/users.php';
 global $connection;
 $con = new users();
 // $weight = new weight_log();
@@ -10,10 +8,10 @@ if(isset($_POST['reset'])){
   // header("Location: passwordReset.php");
 echo $helper->redirect("passwordReset.php");
 }
-
 //logs user in
   if(isset($_POST['login'])){
-   
+
+    
     //remember the user
        if(isset($_POST['rememberme'])){
          $year= time() + 31536000;
@@ -48,8 +46,15 @@ echo $helper->redirect("passwordReset.php");
         }else{
           $_SESSION['user_id']=$user_id;
           $_SESSION['loggedin']=true;
+          
+          if(isset($_COOKIE['loginUser'])){
           unset($_COOKIE['loginUser']);
+          }
+          if(isset($_COOKIE['login'])){
           unset($_COOKIE['login']);
+          }
+        
+
           echo $helper->redirect("../views/profile.php?id=".$_SESSION['user_id']);
         }
 
@@ -76,28 +81,42 @@ echo $helper->redirect("passwordReset.php");
       include 'login.php';
    }else{
      echo '<div class="alert alert-warning" >Invalid login</div>';
-     ?>
+   
+     
+     include 'login.php';
+       ?>
      <br/><br/>
      <?php
-     include 'login.php';
+     
    }
  }
 }
 
 //login with fitbit option 
 if(isset($_POST['login_with_fitbit'])){
+ 
+   if(!isset($_SESSION)){
+          session_start();
+     }
+
   //set logged in session varable
-   $_SESSION['user_id']=rand(1000,70000);
+   $_SESSION['user_id']=rand(345,789234567);
    $_SESSION['loggedin']=true;
    $_SESSION['fitbit']=true;
+   require_once '../js/fitbit.php';
 
-   $helper->console_log("logged in with fitbit api ");
-  ?>
+   
 
+    echo $helper->console_log("user". $_SESSION['user_id']);
 
-   <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>google.charts.load('current', {'packages':['line']});</script>
-     <script src="../assets/js/boot.js"></script>
-  <?php
+    
+
+   //  echo $helper->console_log("loggedin".$_SESSION['loggedin']);
+   //   echo $helper->console_log("fitbit" .$_SESSION['fitbit']);
+
+//echo $helper-> redirect("profile.php?id=".$$_SESSION['user_id']. )
+
+  
 }
+
 

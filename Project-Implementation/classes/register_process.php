@@ -1,5 +1,6 @@
 <?php
-require_once '../db_models/users.php';
+require_once '../database_functions/users.php';
+
 //require_once '../database_functions/weight_log.php';
 
 $con = new users();

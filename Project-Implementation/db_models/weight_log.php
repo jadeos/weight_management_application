@@ -1,6 +1,6 @@
 <?php
-include_once '../config/db.php';
-
+//include_once '../config/db.php';
+include_once '../database/database.php';
 //class required for user weight information.update not needed as will always be updated and each update should be shown.
 class weight_log{
 
@@ -12,7 +12,7 @@ class weight_log{
 
   //GET ALL WEIGHT INFO FOR THE USER WHO WANTS TO ACCESS IT
   function getUserLog($user_id){
-    $res=sqlQuery("SELECT * FROM weight_log WHERE user_id='$user_id'   ORDER BY date_added ASC ");
+    $res=sqlQuery("SELECT * FROM weight_log WHERE user_id='$user_id' ORDER BY date_added ASC ");
     return $res;
   }
 

@@ -13,4 +13,6 @@ Android wear:
 	 if mobile 
 	 	device should be installed by being uploaded to play store. 
 	 if not mobile
-	 	works on desktop
+	 	works on 
+
+

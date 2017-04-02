@@ -5,11 +5,14 @@
   Date Created: 24/2/17
 
 */
+  
+
  
  class logs{
 
 
     function weight_log(){
+
          $con = new users();
         $weight = new weight_log();
          $res =$con->searchUser($_SESSION['user_id']);
@@ -22,9 +25,10 @@
           <th>Actions</th>
           <?php
         $date='';
-          while($row=fetch_row($weightLog)){
-            $weightt = $row[1];
-               $timestamp =$row[0];
+          while($row=mysqli_fetch_array($weightLog)){
+               $timestamp =$row['date_added'];
+            $weightt = $row['previous_weight'];
+            
                $timestamp_array=explode(" ",$timestamp);
                 $date=$timestamp_array[0];
                 $time=$timestamp_array[1];
@@ -37,18 +41,32 @@
                 <form method="post" action ="profile.php">
                   <input type="hidden" name="userweight" value="<?php echo $weightt ?>"/>
                   <button type="submit" name="delete_weight" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-remove"></span> Remove
+                    <span class="glyphicon glyphicon-remove" onclick ="gototab();""></span> Remove
                   </button>
                 </form>
               </td>
-           </tr>
+           </tr> <script>
+             function gototab()
+             {
+              var url = location.href;
+    location.href = "#"+  window.location.hash;               
+}
+         
+             </script>
+
           <?php
           //delete action for users weight
            }
           if(isset($_POST['delete_weight'])){
              echo $weight->deleteWeight($_POST['userweight'],$_SESSION['user_id']);
-             echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
-             echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
+           //  echo '<script type="text/javascript">window.location.replace("http://localhost/Project-Implementation/views/profile.php?id="'.$_SESSION['user_id'].'");</script>';
+          //echo '<script> window.location.href=document.url+"?id="'.$_SESSION['user_id'].'"#weightlog"</script>';
+            // echo '<script>("#mydiv").load(location.href + " #mydiv");';
+             ?>
+
+            
+             <?php
+           
           }
           ?>
       
@@ -57,7 +75,8 @@
     }
     
     function exercise_log(){
-           $con = new users(); $exercise = new exercise_log();
+           $con = new users(); 
+           $exercise = new exercise_log();
              $exercise = new exercise_log();
           $exerciselog =$exercise->getExerciseLogItem($_SESSION['user_id']);
         ?>
@@ -70,21 +89,21 @@
        <th>Type</th>
        <th>Actions</th>
        <?php
-       while($row=fetch_row($exerciselog)){
-        $id=$row[0];
-        $timestamp =$row[1];
+       while($row=mysqli_fetch_array($exerciselog)){
+        $id=$row['id'];
+        $timestamp =$row['date_added'];
         $timestamp_array=explode(" ",$timestamp);
         $date=$timestamp_array[0];
         $time=$timestamp_array[1];
-        $length=$row[5];
+        $length=$row['length'];
         ?>
        <tr>
          <td><?php echo $date;?></td>  
          <td><?php echo $time;?></td> 
-         <td><?php echo $row[2];?></td> 
-          <td><?php echo $row[3];?></td> 
-           <td><?php echo $row[5];?></td> 
-          <td><?php echo $row[4];?></td> 
+         <td><?php echo $row['exercise'];?></td> 
+          <td><?php echo $row['description'];?></td> 
+           <td><?php echo $row['type'];?></td> 
+          <td><?php echo $row['length'];?></td> 
        
          <td> 
           <form method="post" action ="profile.php">
@@ -103,8 +122,8 @@
         }
           if(isset($_POST['delete_exercise'])){
         echo $exercise->removeExerciseLogEntry($_POST['l_id'],$_SESSION['user_id'],$_POST['length'],$_POST['timestamp']);
-        echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
-        echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
+        echo '<script type="text/javascript">window.location.replace("http://localhost/Project-Implementation/views/profile.php?id="'.$_SESSION['user_id'].'");</script>';
+        
        }
    
 
@@ -119,7 +138,6 @@
  
              <!--table headings-->
         <th>Date Added</th>
-        <th>Time</th>
         <th>Description</th>
         <th>Calories</th>
         <th>Protein</th>
@@ -130,24 +148,21 @@
         <th>Actions</th>
       <?php
       //populate the table with code.
-      while($row=fetch_row($mylog)){
-        $id =$row[0];
-        $entry = $row[9];
-           $timestamp =$row[1];
-        $timestamp_array=explode(" ",$timestamp);
-        $date=$timestamp_array[0];
-        $time=$timestamp_array[1];
+      while($row=mysqli_fetch_array($mylog)){
+        $id =$row['food_id'];
+        $entry = $row['entry_type'];
+        $timestamp =$row['date_a'];
+        
        ?>
        <tr>
-        <td><?php echo $date;?></td> 
-        <td><?php echo $time;?></td>
-        <td><?php echo $row[3];?></td>
-        <td><?php echo $row[4];?></td>
-        <td><?php echo $row[5];?></td>
-        <td><?php echo $row[6];?></td>
-        <td><?php echo $row[7];?></td>
-        <td><?php echo $row[8];?></td>
-        <td><?php echo $row[2];?></td>
+        <td><?php echo $row['date_a'];?></td> 
+        <td><?php echo $row['name'];?></td>
+        <td><?php echo $row['calories'];?></td>
+        <td><?php echo $row['protein'];?></td>
+        <td><?php echo $row['fat'];?></td>
+        <td><?php echo $row['carbohydrates'];?></td>
+        <td><?php echo $row['sugar'];?></td>
+        <td><?php echo $row['food_group'];?></td>
         <td> 
           <form method="post" action ="profile.php">
             <input type="hidden" name="logid" value="<?php echo $id ?>"/>
@@ -162,8 +177,8 @@
      //delete action for user breakfast item
      if(isset($_POST['delete_breakfast'])){
         echo $food->removeLogEntry($_POST['logid'],$_SESSION['user_id'],$_POST['entrytype']);
-             echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
-             echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
+             echo '<script type="text/javascript">window.location.replace("http://localhost/Project-Implementation/views/profile.php?id="'.$_SESSION['user_id'].'");</script>';
+            
        }
        
       ?>
@@ -178,7 +193,6 @@
           $mylunchlog = $food->getUserLunch($_SESSION['user_id']);
          ?>
           <th>Date Added</th>
-           <th>Time</th>
           <th>Description</th>
           <th>Calories</th>
           <th>Protein</th>
@@ -188,25 +202,23 @@
           <th>Food Group</th>
           <th>Actions</th>
            <?php
-            while($row=fetch_row($mylunchlog)){
-                $id =$row[0];
-               $entry = $row[9];
-                 $timestamp =$row[1];
-        $timestamp_array=explode(" ",$timestamp);
-        $date=$timestamp_array[0];
-        $time=$timestamp_array[1];
-             ?>
-             <tr>
-              <td><?php echo $date;?></td> 
-               <td><?php echo $time;?></td>
-              <td><?php echo $row[3];?></td>
-              <td><?php echo $row[4];?></td>
-              <td><?php echo $row[5];?></td>
-              <td><?php echo $row[6];?></td>
-              <td><?php echo $row[7];?></td>
-              <td><?php echo $row[8];?></td>
-              <td><?php echo $row[2];?></td>
-              <td>
+            while($row=mysqli_fetch_array($mylunchlog)){
+                 $id =$row['food_id'];
+        $entry = $row['entry_type'];
+           $timestamp =$row['date_a'];
+        
+       ?>
+       <tr>
+        <td><?php echo $row['date_a'];?></td> 
+
+        <td><?php echo $row['name'];?></td>
+        <td><?php echo $row['calories'];?></td>
+        <td><?php echo $row['protein'];?></td>
+        <td><?php echo $row['fat'];?></td>
+        <td><?php echo $row['carbohydrates'];?></td>
+        <td><?php echo $row['sugar'];?></td>
+        <td><?php echo $row['food_group'];?></td>
+        <td> 
                   <form method="post" action ="profile.php">
                     <input type="hidden" name="logid" value="<?php echo $id ?>"/>
                     <input type="hidden" name="entrytype" value="<?php echo $entry ?>"/>
@@ -221,8 +233,8 @@
                 //delete action for user lunch item
                if(isset($_POST['delete_lunch'])){
                   echo $food->removeLogEntry($_POST['logid'],$_SESSION['user_id'],$_POST['entrytype']);
-                   echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
-                   echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
+                   echo '<script type="text/javascript">window.location.replace("http://localhost/Project-Implementation/views/profile.php?id="'.$_SESSION['user_id'].'");</script>';
+                 
                  }
               
      }
@@ -233,8 +245,7 @@
   $mydinnerlog =$food->getUserDinner($_SESSION['user_id']);
          ?>
          <th>Date Added</th>
-            <th>Time</th>
-            <th>Description</th>
+              <th>Description</th>
             <th>Calories</th>
             <th>Protein</th>
             <th>Fat</th>
@@ -243,25 +254,23 @@
              <th>Food Group</th>
             <th>Actions</th>
             <?php
-            while($row=fetch_row($mydinnerlog)){
-              $id =$row[0];
-             $entry = $row[9];
-                 $timestamp =$row[1];
-        $timestamp_array=explode(" ",$timestamp);
-        $date=$timestamp_array[0];
-        $time=$timestamp_array[1];
-             ?>
-             <tr>
-              <td><?php echo $date;?></td>
-              <td><?php echo $time;?></td>
-              <td><?php echo $row[3];?></td>
-              <td><?php echo $row[4];?></td>
-              <td><?php echo $row[5];?></td>
-              <td><?php echo $row[6];?></td>
-              <td><?php echo $row[7];?></td>
-              <td><?php echo $row[8];?></td>
-              <td><?php echo $row[2];?></td>
-              <td>
+            while($row=mysqli_fetch_array($mydinnerlog)){
+               $id =$row['food_id'];
+        $entry = $row['entry_type'];
+           $timestamp =$row['date_a'];
+        
+       ?>
+       <tr>
+        <td><?php echo $row['date_a'];?></td> 
+       
+        <td><?php echo $row['name'];?></td>
+        <td><?php echo $row['calories'];?></td>
+        <td><?php echo $row['protein'];?></td>
+        <td><?php echo $row['fat'];?></td>
+        <td><?php echo $row['carbohydrates'];?></td>
+        <td><?php echo $row['sugar'];?></td>
+        <td><?php echo $row['food_group'];?></td>
+        <td> 
                 <form method="post" action ="profile.php">
                   <input type="hidden" name="logid" value="<?php echo $id ?>"/>
                   <input type="hidden" name="entrytype" value="<?php echo $entry ?>"/>
@@ -277,8 +286,8 @@
              //delete action for user dunner item
            if(isset($_POST['delete_dinner'])){
               echo $food->removeLogEntry($_POST['logid'],$_SESSION['user_id'],$_POST['entrytype']);
-              echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
-              echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
+              echo '<script type="text/javascript">window.location.replace("http://localhost/Project-Implementation/views/profile.php?id="'.$_SESSION['user_id'].'");</script>';
+             
              }
         
      }
@@ -288,7 +297,6 @@
   $mysnacklog =$food->getUserSnack($_SESSION['user_id']);
         ?>
        <th>Date Added</th>
-        <th>Time</th>
         <th>Description</th>
         <th>Calories</th>
         <th>Protein</th>
@@ -298,25 +306,22 @@
         <th>Food Group</th>
         <th>Actions</th>
       <?php
-      while($row=fetch_row($mysnacklog)){
-       $id =$row[0];
-       $entry = $row[9];
-           $timestamp =$row[1];
-        $timestamp_array=explode(" ",$timestamp);
-        $date=$timestamp_array[0];
-        $time=$timestamp_array[1];
+      while($row=mysqli_fetch_array($mysnacklog)){
+       $id =$row['food_id'];
+        $entry = $row['entry_type'];
+           $timestamp =$row['date_a'];
+       
        ?>
        <tr>
-        <td><?php echo $date;?></td> 
-        <td><?php echo $time;?></td>
-        <td><?php echo $row[3];?></td>
-        <td><?php echo $row[4];?></td>
-        <td><?php echo $row[5];?></td>
-        <td><?php echo $row[6];?></td>
-        <td><?php echo $row[7];?></td>
-        <td><?php echo $row[8];?></td>
-        <td><?php echo $row[2];?></td>
-        <td>  
+        <td><?php echo $row['date_a'];?></td> 
+        <td><?php echo $row['name'];?></td>
+        <td><?php echo $row['calories'];?></td>
+        <td><?php echo $row['protein'];?></td>
+        <td><?php echo $row['fat'];?></td>
+        <td><?php echo $row['carbohydrates'];?></td>
+        <td><?php echo $row['sugar'];?></td>
+        <td><?php echo $row['food_group'];?></td>
+        <td> 
          <form method="post" action ="profile.php">
             <input type="hidden" name="logid" value="<?php echo $id ?>"/>
             <input type="hidden" name="entrytype" value="<?php echo $entry ?>"/>
@@ -331,8 +336,8 @@
        //delete action for user snack item
      if(isset($_POST['delete_snack'])){
         echo $food->removeLogEntry($_POST['logid'],$_SESSION['user_id'],$_POST['entrytype']);
-        echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
-        echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';
+        echo '<script type="text/javascript">window.location.replace("http:/localhost/Project-Implementation/views/profile.php?id="'.$_SESSION['user_id'].'");</script>';
+       
        }
       ?>
     
@@ -350,9 +355,9 @@
            <th>Unit</th>
           <th>Actions</th>
           <?php
-          while($row=fetch_row($water_log)){
-            $waterr = $row[0];
-              $timestamp =$row[1];
+          while($row=mysqli_fetch_array($water_log)){
+            $waterr = $row['id'];
+              $timestamp =$row['date_added'];
                $timestamp_array=explode(" ",$timestamp);
                 $date=$timestamp_array[0];
                 $time=$timestamp_array[1];
@@ -360,8 +365,8 @@
             <tr>
               <td><?php echo $date;?></td>
               <td><?php echo $time;?></td>
-              <td><?php echo $row[3];?></td>
-               <td><?php echo $row[4];?></td>
+              <td><?php echo $row['quantity'];?></td>
+               <td><?php echo $row['unit'];?></td>
               <td>
                 <form method="post" action ="profile.php">
                   <input type="hidden" name="userwater" value="<?php echo $waterr?>"/>
@@ -379,7 +384,7 @@
           //delete action for users water
        if(isset($_POST['delete_water'])){
            echo $water->deleteWaterEntry( $_POST['userwater'],$_SESSION['user_id'],$_POST['userwaterqty'],$_POST['userwaterunit']);
-            echo '<script type="text/javascript">window.location.replace("http://weightmentor.jadeosullivan.com/views/profile.php");</script>';         
+            echo '<script type="text/javascript">window.location.replace("http://localhost/Project-Implementation/views/profile.php?id="'.$_SESSION['user_id'].'");</script>';         
        }
           
         

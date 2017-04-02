@@ -6,7 +6,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
-        <a href="#" class="img-rounded pull-left" ><img src="img/logo.png" width="25" height="25" hspace="10"> </a>
+        <a href="#" class="img-rounded pull-left" ><img src="../img/logo.png" width="25" height="25" hspace="10"> </a>
         <h4 class="modal-title" id="myModalLabel">Weight Mentor</h4>
       </div> <!-- /.modal-header -->
       <div class="modal-body">
@@ -35,16 +35,13 @@
 
           <div class="checkbox">
             <label>
-              <input type="checkbox" value=<?php if(isset($_COOKIE['remember_me'])) {echo 'checked="checked"';}	else {	echo '';}?>> Remember me
+              <input type="checkbox" value=<?php if(isset($_COOKIE['remember_me'])) {echo 'checked="checked"';} else {  echo '';}?>> Remember me
             </label>
           </div> <!-- /.checkbox -->
-          <button class="form-control btn btn-primary"  type="submit" name = "reset"> Reset Password </button> 
+         <button class="form-control btn btn-primary"  type="submit" name = "reset"> Reset Password </button> 
           <button class="form-control btn btn-primary"  type="submit" name ="login">Login</button>
           <button class="form-control btn btn-primary"  type="submit" id="fitbit_login" name ="login_with_fitbit">Login with FitBit</button>
-       
-
         </form>
-         
         </div>
 
         <!--Registeration Modal -->
@@ -92,7 +89,7 @@
                <input id = "finalDate" type="hidden" value="" name="bDay">
                <script>
                function getDate(){
-                 var mydate=	getId("dateT").value;
+                 var mydate=  getId("dateT").value;
                  getId("finalDate").value=mydate;
                }
                </script>

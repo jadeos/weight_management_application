@@ -1,6 +1,6 @@
 <?php
 /* File Used to log user out of account. */
-require '../assets/helpers/functions.php';
+require '../helpers/functions.php';
 $helper = new functions();
   session_start();
   session_unset();

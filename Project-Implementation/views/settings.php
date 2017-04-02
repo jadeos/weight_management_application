@@ -1,4 +1,4 @@
 <?php
-//Settings-eg security, etc PASSWORD Reset, email changes etc
+//Settings-eg security, etc PASSWORD Reset, email changes,notifications etc
 
 ?>

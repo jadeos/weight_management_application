@@ -19,9 +19,11 @@ if (!window.location.hash) {
 var processResponse = function(res) {
     if (!res.ok) {
         throw new Error('Fitbit API request failed: ' + res);
+    }else{
+        console.log("Api Request successful");
     }
 
-    var contentType = res.headers.get('content-type')
+    var contentType = res.headers.get('content-type');
     if (contentType && contentType.indexOf("application/json") !== -1) {
         return res.json();
     } else {
@@ -29,96 +31,60 @@ var processResponse = function(res) {
     }
 }
 
-
-
-var processHeartRate = function(timeSeries) {
-    return timeSeries['activities-heart-intraday'].dataset.map(
-        function(measurement) {
-            return [
-                measurement.time.split(':').map(
-                    function(timeSegment) {
-                        return Number.parseInt(timeSegment);
-                    }
-                ),
-                measurement.value
-            ];
-        }
-    );
-}
-
-var graphHeartRate = function(timeSeries) {
-   // console.log(timeSeries);
-    var data = new google.visualization.DataTable();
-    data.addColumn('timeofday', 'Time of Day');
-    data.addColumn('number', 'Heart Rate');
-
-    data.addRows(timeSeries);
-
-    var options = google.charts.Line.convertOptions({
-        height: 450
-    });
-
-    var chart = new google.charts.Line(document.getElementById('chart'));
-
-    chart.draw(data, options);
-}
-
-fetch(
-    'https://api.fitbit.com/1/user/-/activities/heart/date/2016-03-19/1d/1sec/time/21:00/23:00.json',
-    {
-        headers: new Headers({
-            'Authorization': 'Bearer ' + fitbitAccessToken
-        }),
-        mode: 'cors',
-        method: 'GET'
-    }
-).then(processResponse)
-.then(processHeartRate)
-.then(graphHeartRate)
-.catch(function(error) {
-    //console.log(error);
+$.getJSON('https://api.fitbit.com/1/user/-/activities/steps/date/today/1m.json', function(fitbit){
+    console.log(fitbit.activities.steps);
 });
 
 
-var getUser = function(timeSeries) {
-     console.log(timeSeries);
-    // var data = new google.visualization.DataTable();
-    // data.addColumn('AboutME');
+// var processHeartRate = function(timeSeries) {
+//     return timeSeries['activities-heart-intraday'].dataset.map(
+//         function(measurement) {
+//             return [
+//                 measurement.time.split(':').map(
+//                     function(timeSegment) {
+//                         return Number.parseInt(timeSegment);
+//                     }
+//                 ),
+//                 measurement.value
+//             ];
+//         }
+//     );
+// }
 
-    // data.addRows(timeSeries);
+// var graphHeartRate = function(timeSeries) {
+//    // console.log(timeSeries);
+//     var data = new google.visualization.DataTable();
+//     data.addColumn('timeofday', 'Time of Day');
+//     data.addColumn('number', 'Heart Rate');
 
-    // var options = google.charts.Line.convertOptions({
-    //     height: 450
-    // });
+//     data.addRows(timeSeries);
 
-    // var chart = new google.charts.Line(document.getElementById('chart'));
+//     var options = google.charts.Line.convertOptions({
+//         height: 450
+//     });
 
-    // chart.draw(data, options);
+//     var chart = new google.charts.Line(document.getElementById('chart'));
 
-    var data = JSON.parse(timeSeries);
-    console.log(data);
-    document.getElementById('chart').innerText = data['AboutME'];
-}
+//     chart.draw(data, options);
+// }
 
-fetch(
-    'https://api.fitbit.com/1/user/-/profile.json',
-    {
-        headers: new Headers({
-            'Authorization': 'Bearer ' + fitbitAccessToken
-        }),
-        mode: 'cors',
-        method: 'GET'
-    }
-).then(getUser)
-
-.catch(function(error) {
-    console.log(error);
-});
-function display_data(){
-    document.getElementById('infochart').value="<div class ='table-responsive'> <table class = 'table' width = '40%'><th></th></table><div>";
-
-}
+// fetch(
+//     'https://api.fitbit.com/1/user/-/activities/steps/date/today/1m.json'
+//     //'GET https://api.fitbit.com/1/user/-/activities/date/.json'
+//     //'GET https://api.fitbit.com/1/user/-/activities/heart/date/2016-03-19/1d/1sec/time/21:00/23:00.json',
+//     {
+//         headers: new Headers({
+//             'Authorization': 'Bearer ' + fitbitAccessToken
+//         }),
+//         mode: 'cors',
+//         method: 'GET'
+//     }
+//     console.log(activities.steps);
+// ).then(processResponse)
+// .then(processHeartRate)
+// .then(graphHeartRate)
+// .catch(function(error) {
+//     //console.log(error);
+// });
 
 
-
-window.onload =display_data();

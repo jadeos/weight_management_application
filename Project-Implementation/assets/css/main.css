@@ -7,7 +7,7 @@
 }
 
 .container{
-	margin-left:250px;
+	
 	text-align:center;
 
 
@@ -63,7 +63,9 @@
 
 
 }
-
+#weighth{
+  background-color: red;
+}
 #user_progress{
     margin-left:-14.5%;
 

@@ -5450,7 +5450,7 @@ button.list-group-item-warning:focus {
 }
 a.list-group-item-warning.active,
 button.list-group-item-warning.active,
-a.list-group-item-warning.active:hover,
+a.list-group-item-warninactive:hover,
 button.list-group-item-warning.active:hover,
 a.list-group-item-warning.active:focus,
 button.list-group-item-warning.active:focus {
@@ -5732,10 +5732,12 @@ button.list-group-item-danger.active:focus {
 }
 .panel-default {
   border-color: #ddd;
+  background-color: lightgrey;
 }
 .panel-default > .panel-heading {
-  color: #333;
-  background-color: #f5f5f5;
+ 
+  background-color:red; 
+  color:#ffffff;
   border-color: #ddd;
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {

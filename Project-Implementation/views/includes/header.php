@@ -11,36 +11,32 @@ error_reporting(E_ERROR | E_PARSE);
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="img-rounded pull-left " ><img src="../assets/img/logo.png"> </a>
+      <a href="#" class="img-rounded pull-left " ><img src="../img/logo.png"> </a>
              <a class="navbar-brand" href="#" style=" color:#ffffff;"></a>
     </div>
      <div class="collapse navbar-collapse" id="myNavbar">
     <ul class="nav navbar-nav" >
       <li><a href="../views/home.php" style=" color:#ffffff;">Home</a></li>
-      <li><a href="#" style=" color:#ffffff;">Blog</a></li>
-      <li><a href="" style=" color:#ffffff;">Community</a></li>
-      <li><a href="../views/contact.php"  name ="contact" id="contact" style=" color:#ffffff;">Contact</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
+
     <?php
-    
+
+        //if a session hasnt already started start one.
         if(!isset($_SESSION)){
          session_start();
         }
+        //if the user has logged in
         if ((isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)) {
          $user =$con->searchUser($_SESSION['user_id']);
          if($row=fetch_row($user)){
           if($row[2]=="admin"){
-       //IF THE USER IS A REGUALR USER OR ADMIN.
-       ?>
-       <li> <a href="../views/adminView.php" style=" color:#ffffff;" name ="profile">Admin Panel</a></li>
-       <?php
-        }
-      }
+           //IF THE USER IS A REGUALR USER OR ADMIN.
+           ?>
+           <li> <a href="../views/adminView.php" style=" color:#ffffff;" name ="profile">Admin Panel</a></li>
+           <?php
+           }
+          }
       ?> 
-    
-       <li><a href=""  style=" color:#ffffff;">Messages</a></li>
-      <li><a href="../views/profile.php?id='<?php echo $_SESSION['user_id'];?>" style=" color:#ffffff;">My Profile</a></li>
+      <li><a href="../views/profile.php" style=" color:#ffffff;">My Profile</a></li>
       <li><a href="../classes/logout.php " name="logout" style=" color:#ffffff;">Log Out</a></li>
     </ul>
       <?php
@@ -55,3 +51,4 @@ error_reporting(E_ERROR | E_PARSE);
   </div>
  </div>
 </nav>
+
