@@ -5,16 +5,10 @@
 	Database class used to handle all interactions with the database
 */
 define('DB_SERVER','localhost');
-define('DB_USER','root');
-define('DB_PASS' ,'');
-define('DB_NAME', 'weight_mentor');
-//define('DB_SERVER','localhost');
-// define('DB_USER','admin_jade');
-// define('DB_USER','admin_admin');
- //define('DB_PASS' ,'baw1UTmZKr');
-// define('DB_PASS' ,'lNnhM4wqMQ'); 
-// define('DB_NAME', 'admin_weightmentor');
- //define('DB_NAME', 'admin_jade');
+define('DB_USER','YOUR USER');
+define('DB_PASS' ,'YOUR PASSWORD');
+define('DB_NAME', 'YOUR DATABASE NAME');
+
  	$connection = mysqli_connect(DB_SERVER,DB_USER,DB_PASS,DB_NAME) or die("Failed to connect to the database server, please let admin know about this problem");
 
 
